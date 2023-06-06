@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+int solve(int sr,int sc,vector<vector<int>>&dp){
+
+    if(sr<0 || sc<0){
+		return 0;
+	}
+
+    if(sr==0 && sc==0){
+		return 1;
+	}
+
+	if(dp[sr][sc]!=-1){
+		return dp[sr][sc];
+	}
+
+	int left = solve(sr,sc-1,dp);
+	int up = solve(sr-1,sc,dp);
+
+	return dp[sr][sc] =  left + up;
+}
+
+int uniquePaths(int m, int n) {
+	vector<vector<int>> dp(m,vector<int> (n,-1));
+	return solve(m-1,n-1,dp);
+}
