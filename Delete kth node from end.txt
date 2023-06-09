@@ -1,0 +1,57 @@
+/*
+Following is the class structure of the Node class:
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node()
+    {
+        this->data = 0;
+        next = NULL;
+    }
+    Node(int data)
+    {
+        this->data = data; 
+        this->next = NULL;
+    }
+    Node(int data, Node* next)
+    {
+        this->data = data;
+        this->next = next;
+    }
+};
+*/
+
+Node* removeKthNode(Node* head, int K)
+{
+   
+   Node* slow = head;
+   Node* fast = head;
+   Node* prevNode = NULL;
+
+   // to maintain a gap of K we move fast pointer ahead of slow by k steps
+   for(int i=0;i<K;i++){
+       fast = fast->next;
+   }
+
+   // now since gap between the two pointers is K slow pointer will point to
+   // kth node from the last
+
+   while(fast!=NULL){
+       prevNode = slow;
+       slow = slow->next;
+       fast = fast->next;
+   }
+
+   if(prevNode==NULL){
+       // need to remove the head node in this case
+       Node*temp = head->next;
+       return temp;
+   }
+
+   prevNode->next = prevNode->next->next;
+   return head;
+   
+}
