@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+vector<int> ninjaAndSortedArrays(vector<int>& arr1, vector<int>& arr2, int m, int n) {
+	
+	// need to take two pointers one pointing at beginning of arr1 and other at the beginning of arr2
+
+    int ptr1=0,ptr2=0;
+
+    vector<int> ans(m+n);
+	int itr=0;
+	while(ptr1<m && ptr2<n){
+		if(arr1[ptr1]<arr2[ptr2]){
+            ans[itr++] = arr1[ptr1++];
+		}
+		else{
+			ans[itr++] = arr2[ptr2++];
+		}
+	}
+
+	while(ptr1<m){
+		ans[itr++] = arr1[ptr1++];
+	}	
+
+	while(ptr2<n){
+		ans[itr++] = arr2[ptr2++];
+	}
+
+	return ans;
+}
